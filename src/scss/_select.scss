@@ -1,0 +1,91 @@
+/* Custom Select */
+
+.CustomSelect {
+  position: relative;
+  width: 240px;
+  // font-family: $Roboto;
+  @include typo($black, 16px);
+  background-color: $white;
+  background-image: url(/img/arrow-down-select.svg);
+  background-repeat: no-repeat;
+  // background-position: right center;
+  background-position: calc(100% - 10px) center;
+  background-size: 16px 16px;
+  border: 1px solid $white;
+  border-radius: 2px;
+  padding: 0.75em 1em;
+  margin: 0;
+
+  &:hover {
+    cursor: pointer;
+    border-color: $colorPrimary;
+    @include transition(border-color);
+  }
+
+  &.is-active,
+  &:active,
+  &:focus {
+    border-color: $colorPrimary;
+    outline: none;
+  }
+
+  &.is-active,
+  &:active {
+    border-radius: 2px 2px 0 0;
+    border-bottom: none;
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 14px;
+    position: absolute;
+    top: 50%;
+    margin-top: -7px;
+    right: 20px;
+    background: url("/img/arrow-down-select.svg") no-repeat center transparent;
+    background-size: contain;
+  }
+
+  &.is-active {
+    &::after {
+      transform: rotateX(180deg);
+      @include transition(transform, 0.15s);
+    }
+  }
+
+  &-options {
+    display: none;
+    position: absolute;
+    z-index: 99999;
+    width: 240px;
+    right: 0px;
+    left: 0px;
+    top: calc(100% - 1px);
+    border: 1px solid $colorPrimary;
+    border-top: none;
+    border-radius: 0 0 2px 2px;
+    background-color: #fff;
+    max-height: 242px;
+    overflow: auto;
+
+    &.is-active {
+      display: block;
+    }
+
+    li {
+      @extend .Form-input;
+      border: none;
+      border-top: 1px solid $grey--light;
+      border-radius: 0;
+      text-align: left;
+
+      &:hover {
+        cursor: pointer;
+        color: #fff;
+        background-color: $colorPrimary;
+      }
+    }
+  }
+}
