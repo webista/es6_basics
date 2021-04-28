@@ -6,7 +6,7 @@
   // font-family: $Roboto;
   @include typo($black, 16px);
   background-color: $white;
-  background-image: url(/img/arrow-down-select.svg);
+  background-image: url(../img/arrow-down-select.svg);
   background-repeat: no-repeat;
   // background-position: right center;
   background-position: calc(100% - 10px) center;
@@ -35,25 +35,26 @@
     border-bottom: none;
   }
 
-  &::after {
-    content: "";
-    display: inline-block;
-    width: 25px;
-    height: 14px;
-    position: absolute;
-    top: 50%;
-    margin-top: -7px;
-    right: 20px;
-    background: url("/img/arrow-down-select.svg") no-repeat center transparent;
-    background-size: contain;
-  }
+  // &::after {
+  //   content: "";
+  //   display: inline-block;
+  //   width: 25px;
+  //   height: 14px;
+  //   position: absolute;
+  //   top: 50%;
+  //   margin-top: -7px;
+  //   right: 20px;
+  //   background: url(../img/arrow-down-select.svg) no-repeat center transparent;
+  //   background-size: 16px 16px;
+  //   z-index: 1;
+  // }
 
-  &.is-active {
-    &::after {
-      transform: rotateX(180deg);
-      @include transition(transform, 0.15s);
-    }
-  }
+  // &.is-active {
+  //   &::after {
+  //     transform: rotateX(180deg);
+  //     @include transition(transform, 0.15s);
+  //   }
+  // }
 
   &-options {
     display: none;
