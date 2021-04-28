@@ -1,0 +1,183 @@
+.Form {
+  position: relative;
+  display: block;
+
+  &--signup {
+    display: inline-block;
+    width: 300px;
+  }
+
+  input[type="email"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="search"],
+  input[type="text"],
+  button,
+  select,
+  textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  input[type="submit"] {
+    width: auto;
+  }
+
+  input:read-only {
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  &-row {
+    position: relative;
+    margin-bottom: 20px;
+
+    @media #{$tablet-800-max} {
+      margin-bottom: 30px;
+    }
+
+    &:last-child,
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &-rowFlex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    @media #{$phone-640-max} {
+      flex-direction: column;
+    }
+  }
+
+  &-label {
+    @include typo($white, $baseFontSize);
+  }
+
+  &-input,
+  &-select,
+  &-textarea {
+    font-family: $Roboto;
+    @include typo($black, $baseFontSize);
+    background-color: $white;
+    border: 1px solid $white;
+    border-radius: 2px;
+    padding: 0.75em 1em;
+    margin: 0;
+    @include transition(border-color);
+
+    &:read-only {
+      background-color: $white;
+    }
+
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    &::placeholder {
+      font-family: $Roboto;
+      color: $grey;
+      opacity: 1; /* Firefox */
+      @include transition();
+    }
+
+    &::-webkit-input-placeholder {
+      font-family: $Roboto;
+      color: $grey;
+      @include transition();
+    }
+
+    &::-moz-placeholder {
+      font-family: $Roboto;
+      color: $grey;
+      @include transition();
+    }
+
+    &:-moz-placeholder {
+      font-family: $Roboto;
+      color: $grey;
+      @include transition();
+    }
+
+    /* Microsoft Edge */
+    &::-ms-input-placeholder {
+      font-family: $Roboto;
+      color: $grey;
+      @include transition();
+    }
+
+    /* Internet Explorer 10-11 */
+    &:-ms-input-placeholder {
+      font-family: $Roboto;
+      color: $grey;
+      @include transition();
+    }
+
+    // &:required {
+    //     border: 1px solid #d03a3b;
+    // }
+
+    // &:focus:invalid {
+    //     border: 1px solid #d03a3b;
+    // }
+
+    // &:focus:valid {
+    //     border: 1px solid #6ab606;
+    // }
+
+    &:active,
+    &:focus,
+    &:hover {
+      border-color: $colorPrimary;
+      outline: none;
+    }
+
+    // &:focus::-webkit-input-placeholder {
+    //     text-indent: -100%;
+    //     color: #b0b0b0;
+    // }
+    // &:focus::-moz-placeholder {
+    //     text-indent: -100%;
+    //     color: #b0b0b0;
+    // }
+    // &:focus:-moz-placeholder {
+    //     text-indent: -100%;
+    //     color: #b0b0b0;
+    // }
+    // &:focus:-ms-input-placeholder {
+    //     text-indent: -100%;
+    //     color: #b0b0b0;
+    // }
+
+    &--w80 {
+      width: 80px;
+    }
+  }
+
+  &-select {
+    width: 240px;
+    background-image: url(/img/arrow-down-select.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-position: calc(100% - 10px) center;
+    background-size: 16px 16px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  .Button {
+    align-self: stretch;
+
+    @media #{$phone-640-max} {
+      align-self: auto;
+      width: 240px;
+    }
+  }
+}

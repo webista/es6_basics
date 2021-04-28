@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&subset=latin-ext");
+
+html {
+  font-family: $Roboto;
+  font-size: $baseFontSize;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  @include typo($white, $baseFontSize * 3, $heavy, 1.2);
+  margin-top: 1.5em;
+
+  @media #{$phone-640-max} {
+    font-size: 26px;
+  }
+}
+
+h2 {
+  @include typo($white, $baseFontSize * 2, $bold, 1.2);
+  margin-top: 1.75em;
+
+  @media #{$phone-640-max} {
+    font-size: 22px;
+  }
+}
+
+h3 {
+  @include typo($blue--light, $baseFontSize * 1.5, $bold, 1.2);
+  margin-top: 1.5em;
+
+  @media #{$phone-640-max} {
+    font-size: 20px;
+  }
+}
+
+p {
+  @include typo($white, $baseFontSize, $normal, 1.5);
+  margin-top: 1em;
+}
+
+.Text {
+  @include typo($white, $baseFontSize, $normal, 1.5);
+
+  &--big {
+    font-size: $baseFontSize + 2px;
+  }
+}
+
+a {
+  color: $colorPrimary;
+  @include transition(color, 0.2s);
+
+  &:hover {
+    color: $white;
+  }
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: Consolas, "Courier New", Courier, monospace;
+  color: $black;
+  background-color: $grey--light;
+  padding: 10px;
+}
