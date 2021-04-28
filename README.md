@@ -2,6 +2,8 @@
 
 Just a simple project for JavaScript ES6 learning.
 
+[Try it here](https://webista.github.io/es6_basics).
+
 ## Recommended learning resources
 
 - Learn ES2015 <https://babeljs.io/docs/en/learn>

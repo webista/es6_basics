@@ -15,9 +15,8 @@
     "@babel/core": "^7.9.6",
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.26.14",
     "cssnano": "^4.1.10",
-    "gh-pages": "^3.1.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-babel": "^8.0.0-beta.2",
@@ -39,10 +38,12 @@
   "dependencies": {
     "autoprefixer": "^9.7.6",
     "debug": "^4.1.1",
+    "gh-pages": "^3.1.0",
     "minimist": "^1.2.5"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -52,5 +53,5 @@
   "bugs": {
     "url": "https://github.com/webista/es6_basics/issues"
   },
-  "homepage": "https://github.com/webista/es6_basics#readme"
+  "homepage": "https://webista.github.io/es6_basics"
 }
