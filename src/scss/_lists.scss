@@ -1,0 +1,67 @@
+.List {
+  li {
+    position: relative;
+    @include typo($white, $baseFontSize, $normal, 1.5);
+    padding: 0px 0px 10px 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0px;
+      top: 10px;
+      width: 4px;
+      height: 2px;
+      background: $secondaryColor;
+    }
+  }
+}
+
+.OrderedList {
+  counter-reset: li-counter;
+  list-style: none;
+
+  li {
+    position: relative;
+    @include typo($white, $baseFontSize, $normal, 1.5);
+    padding-left: 40px;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+
+    &::before {
+      content: counters(li-counter, ".") ".";
+      //content: counter(li-counter);
+      counter-increment: li-counter;
+      display: inline-block;
+      //width: 42px;
+      //height: 42px;
+      //background-color: @orange;
+      //.gradient-TopBottom(#dc241b, #ee362f, #dc241b);
+      position: absolute;
+      top: 2px;
+      left: 0px;
+      //margin-left: -21px;
+      @include typo($white, 20px, $bold, 1);
+      //border: 2px solid #fff;
+      //border-radius: 50%;
+      //text-align: left;
+      //padding-right: 3px;
+    }
+  }
+
+  &--animated {
+    li {
+      opacity: 0;
+      transform: translate3d(0px, -5px, 0px);
+      animation-name: FadeInDown;
+      animation-duration: 0.4s;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-delay: 0s;
+    }
+  }
+}
