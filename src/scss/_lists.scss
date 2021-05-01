@@ -11,7 +11,7 @@
       top: 10px;
       width: 4px;
       height: 2px;
-      background: $secondaryColor;
+      background: $colorSecondary;
     }
   }
 }
@@ -32,22 +32,12 @@
 
     &::before {
       content: counters(li-counter, ".") ".";
-      //content: counter(li-counter);
       counter-increment: li-counter;
       display: inline-block;
-      //width: 42px;
-      //height: 42px;
-      //background-color: @orange;
-      //.gradient-TopBottom(#dc241b, #ee362f, #dc241b);
       position: absolute;
       top: 2px;
       left: 0px;
-      //margin-left: -21px;
       @include typo($white, 20px, $bold, 1);
-      //border: 2px solid #fff;
-      //border-radius: 50%;
-      //text-align: left;
-      //padding-right: 3px;
     }
   }
 
