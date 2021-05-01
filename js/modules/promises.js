@@ -74,6 +74,63 @@ waitOneSecond(2)
   .catch((error) => console.warn(`error: ${error}`));
 
 /**
+ * Promise.prototype.finally()
+ */
+document.getElementById("js-form-posts").addEventListener("submit", fetchData);
+
+function fetchData(ev) {
+  ev.preventDefault();
+
+  cleanPosts();
+  showLoader();
+
+  // Always gets a response, unless there is network error
+  // It never throws an error for 4xx or 5xx response
+  // setTimeout here for Loader visibility only
+  setTimeout(() => {
+    const url = "https://jsonplaceholder.typicode.com/posts";
+    fetch(url)
+      .then((response) => response.json())
+      .then(showData)
+      .catch(() => console.log("Connection error"))
+      .finally(hideLoader);
+  }, 400);
+}
+
+function showLoader() {
+  document.getElementById("js-form-posts").insertAdjacentHTML("afterend", `<span id="js-data-loader" class="Loader Loader--data mt20"></span>`);
+}
+
+function hideLoader() {
+  document.getElementById("js-data-loader").remove();
+}
+
+function showData(data) {
+  if (data.length) {
+    console.log("Posts", data);
+    let limit = document.getElementById("js-form-posts-limit").value;
+    let html = `<ol id="js-posts" class="OrderedList OrderedList--animated mt20">`;
+
+    for (let i = 0; i < limit; i++) {
+      html += `<li class="ta-left" style="animation-delay: ${i / 10}s"><code>${JSON.stringify(data[i])}</code></li>`;
+    }
+
+    html += "</ol>";
+    document.getElementById("js-form-posts").insertAdjacentHTML("afterend", html);
+  }
+}
+
+function fail(error) {
+  console.warn(error.message);
+}
+
+function cleanPosts() {
+  if (document.getElementById("js-posts")) {
+    document.getElementById("js-posts").innerHTML = "";
+  }
+}
+
+/**
  * all() built-in method
  * 
  * Waits for last the Promise to finish.

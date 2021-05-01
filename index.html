@@ -29,7 +29,7 @@
             <h3>Metal bands</h3>
             <p>My favorite bands rendering with Custom select box</p>
             <form id="js-form-music" class="Form mt20">
-              <div class="Form-rowFlex">
+              <div class="Form-controls">
                 <label class="Form-label mr10 xs-mb10">Music style</label>
                 <div id="js-form-music-select">
                   <!-- Custom select box - render by JS -->
@@ -46,6 +46,18 @@
             <p>Click on the button and change its color</p>
             <button id="js-btn-es5" class="Button Button--primary mt10 mr5 ml5" type="button">Change my color (ES5)</button>
             <button id="js-btn-es6" class="Button Button--secondary mt10 mr5 ml5" type="button">Change my color (ES6)</button>
+          </section>
+        </section>
+          <section>
+            <h3>Data fetching</h3>
+            <p>Set the limit, click on the button and fetch some posts</p>
+            <form id="js-form-posts" class="Form mt20">
+              <div class="Form-controls">
+                <label class="Form-label mr10 xs-mb10">Limit</label>
+                <input id="js-form-posts-limit" class="Form-input Form-input--w80" type="number" value="1" min="1" max="100">
+                <button class="Button Button--primary ml10 mr10 xs-mt10" type="submit">Fetch some posts</button>
+            </div>
+            </form>
           </section>
         </section>
       </div>
