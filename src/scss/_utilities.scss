@@ -19,6 +19,10 @@
   text-align: left;
 }
 
+.f-bold {
+  font-weight: $bold;
+}
+
 .w100p {
   width: 100%;
 }
@@ -91,4 +95,8 @@
 
 .c-red {
   color: $red;
+}
+
+.c-warning {
+  color: $colorWarning;
 }

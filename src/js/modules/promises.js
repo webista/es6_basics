@@ -89,12 +89,33 @@ function fetchData(ev) {
   // setTimeout here for Loader visibility only
   setTimeout(() => {
     const url = "https://jsonplaceholder.typicode.com/posts";
-    fetch(url)
-      .then((response) => response.json())
-      .then(showData)
-      .catch(() => console.log("Connection error"))
-      .finally(hideLoader);
+    fetch(url).then(checkError).then(showData).catch(handleError).finally(hideLoader);
   }, 400);
+}
+
+function checkError(response) {
+  if (response.status >= 200 && response.status <= 299) {
+    return response.json();
+  } else {
+    throw Error(response.status);
+  }
+}
+
+function handleError(error) {
+  document.getElementById("js-form-posts").insertAdjacentHTML("afterend", `<p class="Text f-bold c-warning mt-20 mb-20">${error}</p>`);
+}
+
+function showData(data) {
+  console.log("Posts", data);
+  let limit = document.getElementById("js-form-posts-limit").value;
+  let html = `<ol id="js-posts" class="OrderedList OrderedList--animated mt20">`;
+
+  for (let i = 0; i < limit; i++) {
+    html += `<li class="ta-left" style="animation-delay: ${i / 10}s"><code>${JSON.stringify(data[i])}</code></li>`;
+  }
+
+  html += "</ol>";
+  document.getElementById("js-form-posts").insertAdjacentHTML("afterend", html);
 }
 
 function showLoader() {
@@ -103,25 +124,6 @@ function showLoader() {
 
 function hideLoader() {
   document.getElementById("js-data-loader").remove();
-}
-
-function showData(data) {
-  if (data.length) {
-    console.log("Posts", data);
-    let limit = document.getElementById("js-form-posts-limit").value;
-    let html = `<ol id="js-posts" class="OrderedList OrderedList--animated mt20">`;
-
-    for (let i = 0; i < limit; i++) {
-      html += `<li class="ta-left" style="animation-delay: ${i / 10}s"><code>${JSON.stringify(data[i])}</code></li>`;
-    }
-
-    html += "</ol>";
-    document.getElementById("js-form-posts").insertAdjacentHTML("afterend", html);
-  }
-}
-
-function fail(error) {
-  console.warn(error.message);
 }
 
 function cleanPosts() {
