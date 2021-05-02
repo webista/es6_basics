@@ -7,7 +7,7 @@
 
 // Stuff with the form (see static HTML in the index.html)
 const formMusic = document.getElementById("js-form-music");
-const formMusicSelect = formMusic.querySelector("#js-form-music-select");
+const formCustomSelectContainer = formMusic.querySelector("#js-custom-select-container");
 const formMusicSubmitBtn = formMusic.querySelector("#js-form-music-submit");
 const formMusicResult = formMusic.querySelector("#js-form-music-result");
 const formMusicResultDelay = 500;
@@ -83,8 +83,6 @@ const music = [
 
 // Custom Select box
 const customSelect = (music) => {
-  let isOpen = false;
-
   let htmlOptions = `<option value="">--Choose one--</option>`;
   let customSelectOptions = "";
 
@@ -94,8 +92,8 @@ const customSelect = (music) => {
   });
 
   let htmlCustomSelect = `
-  <div class="pos-rel">
-    <select class="CustomSelect" id="js-CustomSelect">
+  <div class="CustomSelect" id="js-CustomSelect">
+    <select>
       ${htmlOptions}
     </select>
     <ul class="CustomSelect-options" id="js-CustomSelect-options">
@@ -104,17 +102,17 @@ const customSelect = (music) => {
   </div>  
   `;
 
-  formMusicSelect.innerHTML = htmlCustomSelect;
+  formCustomSelectContainer.innerHTML = htmlCustomSelect;
 
-  const select = document.getElementById("js-CustomSelect");
-  const options = document.getElementById("js-CustomSelect-options");
+  const customSelect = document.getElementById("js-CustomSelect");
+  const select = customSelect.querySelector("select");
+  const customOptions = document.getElementById("js-CustomSelect-options");
 
   const handleOutsideSelect = (e) => {
-    if (!select.contains(e.target)) {
+    if (!customSelect.contains(e.target)) {
       console.log("Click outside the select");
-      select.classList.remove("is-active");
-      options.classList.remove("is-active");
-      isOpen = false;
+      customSelect.classList.remove("is-active");
+      customOptions.classList.remove("is-active");
       console.log("Custom select box is closed!");
     }
   };
@@ -122,26 +120,22 @@ const customSelect = (music) => {
   const handleSelect = (e) => {
     e.preventDefault();
 
-    if (select.classList.contains("is-active")) {
-      select.classList.remove("is-active");
-      options.classList.remove("is-active");
-      isOpen = false;
+    if (customSelect.classList.contains("is-active")) {
+      customSelect.classList.remove("is-active");
+      customOptions.classList.remove("is-active");
       console.log("Custom select box is closed!");
       document.removeEventListener("click", handleOutsideSelect);
     } else {
-      select.classList.add("is-active");
-      options.classList.add("is-active");
-      isOpen = true;
+      customSelect.classList.add("is-active");
+      customOptions.classList.add("is-active");
       console.log("Custom select box is open!");
-      options.querySelectorAll("[data-option]").forEach((option) => option.addEventListener("mousedown", handleOption));
+      customOptions.querySelectorAll("[data-option]").forEach((option) => option.addEventListener("mousedown", handleOption));
       document.addEventListener("click", handleOutsideSelect);
     }
   };
 
   const handleOption = (e) => {
     select.value = e.target.getAttribute("data-option");
-    select.classList.remove("is-active");
-    options.classList.remove("is-active");
   };
 
   document.getElementById("js-CustomSelect").addEventListener("mousedown", handleSelect);
@@ -160,7 +154,7 @@ const renderBands = (bands) => {
 
 const showBandsByStyle = (e) => {
   e.preventDefault();
-  const optionId = document.getElementById("js-CustomSelect").value;
+  const optionId = document.querySelector("#js-CustomSelect select").value;
   if (optionId) {
     formMusicSubmitBtn.classList.add("is-active");
     setTimeout(() => {
