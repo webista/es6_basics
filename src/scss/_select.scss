@@ -1,18 +1,33 @@
-/* Custom Select */
-
 .CustomSelect {
   position: relative;
   width: 240px;
   @include typo($black, 16px);
+  text-align: left;
   background-color: $white;
-  background-image: url(../img/arrow-down-select.svg);
-  background-repeat: no-repeat;
-  background-position: calc(100% - 10px) center;
-  background-size: 16px 16px;
   border: 1px solid $white;
   border-radius: 2px;
   padding: 0.75em 1em;
   margin: 0;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 14px;
+    position: absolute;
+    top: 50%;
+    margin-top: -7px;
+    right: 10px;
+    background: url("../img/arrow-down-select.svg") no-repeat center / contain transparent;
+    transition: transform 0.4s ease;
+  }
+
+  &.is-active {
+    &::after {
+      transform: rotateX(180deg);
+      @include transition(transform, 0.15s);
+    }
+  }
 
   &:hover {
     cursor: pointer;
@@ -30,7 +45,11 @@
   &.is-active,
   &:active {
     border-radius: 2px 2px 0 0;
-    border-bottom: none;
+  }
+
+  select {
+    width: 100%;
+    border: none;
   }
 
   &-options {
@@ -38,8 +57,7 @@
     position: absolute;
     z-index: 99999;
     width: 240px;
-    right: 0px;
-    left: 0px;
+    left: -1px;
     top: calc(100% - 1px);
     border: 1px solid $colorPrimary;
     border-top: none;
