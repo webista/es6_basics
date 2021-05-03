@@ -108,29 +108,32 @@ const customSelect = (music) => {
   const select = customSelect.querySelector("select");
   const customOptions = document.getElementById("js-CustomSelect-options");
 
-  const handleOutsideSelect = (e) => {
+  const openCustomSelect = () => {
+    customSelect.classList.add("is-active");
+    customOptions.classList.add("is-active");
+  };
+
+  const closeCustomSelect = () => {
+    customSelect.classList.remove("is-active");
+    customOptions.classList.remove("is-active");
+  };
+
+  const handleOutsideCustomSelect = (e) => {
     if (!customSelect.contains(e.target)) {
-      console.log("Click outside the select");
-      customSelect.classList.remove("is-active");
-      customOptions.classList.remove("is-active");
-      console.log("Custom select box is closed!");
+      closeCustomSelect();
     }
   };
 
-  const handleSelect = (e) => {
+  const handleCustomSelect = (e) => {
     e.preventDefault();
 
     if (customSelect.classList.contains("is-active")) {
-      customSelect.classList.remove("is-active");
-      customOptions.classList.remove("is-active");
-      console.log("Custom select box is closed!");
-      document.removeEventListener("click", handleOutsideSelect);
+      closeCustomSelect();
+      document.removeEventListener("click", handleOutsideCustomSelect);
     } else {
-      customSelect.classList.add("is-active");
-      customOptions.classList.add("is-active");
-      console.log("Custom select box is open!");
+      openCustomSelect();
       customOptions.querySelectorAll("[data-option]").forEach((option) => option.addEventListener("mousedown", handleOption));
-      document.addEventListener("click", handleOutsideSelect);
+      document.addEventListener("click", handleOutsideCustomSelect);
     }
   };
 
@@ -138,7 +141,14 @@ const customSelect = (music) => {
     select.value = e.target.getAttribute("data-option");
   };
 
-  document.getElementById("js-CustomSelect").addEventListener("mousedown", handleSelect);
+  document.getElementById("js-CustomSelect").addEventListener("mousedown", handleCustomSelect);
+
+  document.addEventListener("keydown", (e) => {
+    const key = e.key;
+    if (key === "Escape") {
+      closeCustomSelect();
+    }
+  });
 };
 
 customSelect(music);
