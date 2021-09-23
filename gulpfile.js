@@ -1,18 +1,16 @@
 const gulp = require("gulp");
-const sourcemaps = require("gulp-sourcemaps");
-// const plumber = require("gulp-plumber");
-// const less = require("gulp-less");
-const sass = require("gulp-sass");
-sass.compiler = require("node-sass");
-const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
-const purgecss = require("gulp-purgecss");
+const babel = require("gulp-babel");
+const browserSync = require("browser-sync");
+const concat = require("gulp-concat");
 const cssnano = require("cssnano");
 const imagemin = require("gulp-imagemin");
-const browserSync = require("browser-sync");
+const postcss = require("gulp-postcss");
+const purgecss = require("gulp-purgecss");
 const rev = require("gulp-rev");
-const concat = require("gulp-concat");
-const babel = require("gulp-babel");
+const sass = require("gulp-sass");
+const sourcemaps = require("gulp-sourcemaps");
+sass.compiler = require("node-sass");
 // Development mode
 // const devBuild = process.env.NODE_ENV !== "production";
 
@@ -48,7 +46,6 @@ gulp.task("sass", () => {
 // Watching .scss, .js, .html files
 gulp.task("watch", () => {
   gulp.watch(paths.styles.scss, gulp.series("sass"));
-  // gulp.watch(paths.scripts.src, gulp.series("js"));
   gulp.watch(paths.scripts.src).on("change", browserSync.reload);
   gulp.watch(paths.html.src).on("change", browserSync.reload);
 });
@@ -69,28 +66,17 @@ gulp.task("html", () => {
 // TODO add Rev
 // TODO add Header
 gulp.task("min-css", () => {
-  // let revName = "main.css?v=" + new Date().getTime().toString();
-  return (
-    gulp
-      .src("src/css/main.css")
-      .pipe(
-        purgecss({
-          content: [paths.html.src],
-          // whitelist: ["is-complete"],
-          whitelistPatterns: [/is-/]
-        })
-      )
-      .pipe(postcss([autoprefixer(), cssnano()]))
-      // .pipe(
-      //   rename({
-      //     basename: "main",
-      //     suffix: ".min",
-      //     extname: ".css",
-      //   })
-      // )
-      // .pipe(rename(revName))
-      .pipe(gulp.dest(paths.styles.dest))
-  );
+  return gulp
+    .src("src/css/main.css")
+    .pipe(
+      purgecss({
+        content: [paths.html.src],
+        // whitelist: ["is-active"],
+        whitelistPatterns: [/is-/]
+      })
+    )
+    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(gulp.dest(paths.styles.dest));
 });
 
 // Minify JS
@@ -110,13 +96,6 @@ gulp.task("min-js", () => {
       .pipe(concat("main.js"))
       .pipe(uglify())
       // .pipe(sourcemaps.write())
-      // .pipe(
-      //   rename({
-      //     basename: "main",
-      //     suffix: ".min",
-      //     extname: ".js",
-      //   })
-      // )
       .pipe(gulp.dest(paths.scripts.dest))
   );
 });
@@ -141,25 +120,3 @@ gulp.task("rev-css", () => {
 
 gulp.task("default", gulp.parallel("serve", "watch"));
 gulp.task("build", gulp.series("clean", "html", "min-css", "min-js"));
-
-// Compile Less into CSS
-/*
-gulp.task("less", (event) => {
-  console.log(event);
-  const stream = gulp.src(files.src.lessMain);
-  return stream
-    .pipe(
-      less().on("error", (error) => {
-        stream.end();
-        console.error(error);
-        return "Compile Less error: \n" + error.message;
-      })
-    )
-    .pipe(gulp.dest(dir.src.css))
-    .pipe(
-      browserSync.reload({
-        stream: true
-      })
-    );
-});
-*/
