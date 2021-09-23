@@ -82,21 +82,21 @@ const music = [
 ];
 
 // Custom Select box
-const customSelect = (music) => {
+const customSelect = (data) => {
   let htmlOptions = `<option value="">--Choose one--</option>`;
   let customSelectOptions = "";
 
-  music.forEach((item, i) => {
+  data.forEach((item, i) => {
     htmlOptions += `<option value="${i}">${item.style}</option>`;
     customSelectOptions += `<li data-option="${i}">${item.style}</li>`;
   });
 
   let htmlCustomSelect = `
-  <div class="CustomSelect" id="js-CustomSelect">
+  <div class="CustomSelect" id="js-custom-select">
     <select>
       ${htmlOptions}
     </select>
-    <ul class="CustomSelect-options" id="js-CustomSelect-options">
+    <ul class="CustomSelect-options" id="js-custom-select-options">
       ${customSelectOptions}
     </ul>
   </div>  
@@ -104,9 +104,9 @@ const customSelect = (music) => {
 
   formCustomSelectContainer.innerHTML = htmlCustomSelect;
 
-  const customSelect = document.getElementById("js-CustomSelect");
+  const customSelect = document.getElementById("js-custom-select");
   const select = customSelect.querySelector("select");
-  const customOptions = document.getElementById("js-CustomSelect-options");
+  const customOptions = document.getElementById("js-custom-select-options");
 
   const openCustomSelect = () => {
     customSelect.classList.add("is-active");
@@ -141,7 +141,7 @@ const customSelect = (music) => {
     select.value = e.target.getAttribute("data-option");
   };
 
-  document.getElementById("js-CustomSelect").addEventListener("mousedown", handleCustomSelect);
+  document.getElementById("js-custom-select").addEventListener("mousedown", handleCustomSelect);
 
   document.addEventListener("keydown", (e) => {
     const key = e.key;
@@ -164,7 +164,7 @@ const renderBands = (bands) => {
 
 const showBandsByStyle = (e) => {
   e.preventDefault();
-  const optionId = document.querySelector("#js-CustomSelect select").value;
+  const optionId = document.querySelector("#js-custom-select select").value;
   if (optionId) {
     formMusicSubmitBtn.classList.add("is-active");
     setTimeout(() => {

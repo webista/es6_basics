@@ -5,6 +5,7 @@
 }
 
 body {
+  background: $black--light;
   margin: 0;
   padding: 0;
 }
@@ -40,8 +41,6 @@ body {
 
 .Main {
   text-align: center;
-  background: $black--light;
-  min-height: 700px;
   padding-bottom: 100px;
   overflow: hidden;
 }

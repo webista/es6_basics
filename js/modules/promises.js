@@ -84,7 +84,7 @@ function fetchData(ev) {
   cleanPosts();
   showLoader();
 
-  // Always gets a response, unless there is network error
+  // Fetch API always gets a response, unless there is network error
   // It never throws an error for 4xx or 5xx response
   // setTimeout here for Loader visibility only
   setTimeout(() => {
