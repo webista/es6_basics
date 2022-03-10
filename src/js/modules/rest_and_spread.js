@@ -6,7 +6,7 @@
 console.groupCollapsed("%cThe Rest parameter", "font-weight: bold");
 
 function sumUp(...toAdd) {
-  console.log(`some numbers: ${toAdd}`);
+  console.log("array of numbers:", toAdd);
   let result = 0;
   for (let i = 0; i < toAdd.length; i++) {
     result += toAdd[i];
@@ -25,7 +25,7 @@ console.groupEnd();
  */
 console.groupCollapsed("%cThe Spread operator", "font-weight: bold");
 let numbers = [1, 2, 3, 4, 5];
-console.log(`some numbers: ${numbers}`);
+console.log("individual numbers:", ...numbers);
 console.log(`max: ${Math.max(...numbers)}`);
 
 console.groupEnd();

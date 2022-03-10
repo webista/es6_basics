@@ -12,4 +12,5 @@ Just a simple project for JavaScript ES6 learning.
 - A Dead Simple intro to Destructuring JavaScript Objects <https://wesbos.com/destructuring-objects/>
 - Arrow function expressions <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions>
 - JS Arrow Functions: Everything You Need to Know <https://youtu.be/thXp0_py9X4>
+- Arrow Functions in JavaScript: How to Use Fat & Concise Syntax <https://www.sitepoint.com/arrow-functions-javascript>
 - Robin Pokorný: JS - Symboly to celé zkomplikovaly <https://youtu.be/f6VGkwBbOGk> [in Czech]

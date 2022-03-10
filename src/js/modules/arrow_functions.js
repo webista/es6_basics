@@ -18,12 +18,16 @@ var isUserLoggedIn = function () {
   return false;
 };
 console.log("isUserLoggedIn: " + isUserLoggedIn());
+
 const isUserLoggedInES6 = () => false;
 console.log("isUserLoggedInES6: " + isUserLoggedInES6());
 
 // Only one fn argument, doesn't need parentheses
-var fnWithOneArg = (a) => a * a;
+const fnWithOneArg = (a) => a * a;
 console.log(`The square of number 5 is ${fnWithOneArg(5)}`);
+
+// Needed parentheses, otherwise an error
+const makeCard = () => ({ suit: "hearts", val: 3 });
 
 // An example from JobsDev lecture https://youtu.be/QrFDUphm2jg?t=1397 [in Czech]
 function greetings(options) {
@@ -35,11 +39,56 @@ function greetings(options) {
   };
 }
 console.log(greetings({ name: "ES5" }).hello());
-const greetingsES6 = ({ name }) => ({ name, hello: () => `Hello ${name}` });
-console.log(greetings({ name: "ES6" }).hello());
 
-// Needed parentheses, otherwise an error
-const makeCard = () => ({ suit: "hearts", val: 3 });
+const greetingsES6 = ({ name }) => ({ name, hello: () => `Hello ${name}` });
+console.log(greetingsES6({ name: "ES6" }).hello());
+
+// Fn returns fn example
+function greeter(greeting) {
+  return function (name) {
+    return greeting + " " + name;
+  };
+}
+var greet = greeter("Hello");
+console.log(greet("ES5"));
+
+const greeterES6 = (greeting) => (name) => `${greeting} ${name}`;
+const greetES6 = greeterES6("Hello");
+console.log(greetES6("ES6"));
+
+// Some data
+const movies = [
+  {
+    title: "The Game",
+    director: "David Fincher",
+    summary: "...",
+    cast: ""
+  },
+  {
+    title: "Interstellar",
+    director: "Christopher Nolan",
+    summary: "...",
+    cast: ""
+  },
+  {
+    title: "Anthropoid",
+    director: "Sean Ellis",
+    summary: "...",
+    cast: ""
+  }
+];
+
+// When arrow fn contains more than one statement, needed to wrap all of them in curly braces and use the "return" keyword
+const moviesList = movies.map((movie) => {
+  const container = {};
+  container.title = movie.title;
+  container.director = movie.director;
+
+  // explicit return
+  return container;
+});
+
+console.table(moviesList);
 
 // Some data
 const music = [
@@ -139,15 +188,20 @@ const customSelect = (data) => {
 
   const handleOption = (e) => {
     select.value = e.target.getAttribute("data-option");
+    select.dispatchEvent(new Event("change"));
   };
 
-  document.getElementById("js-custom-select").addEventListener("mousedown", handleCustomSelect);
+  customSelect.addEventListener("mousedown", handleCustomSelect);
 
   document.addEventListener("keydown", (e) => {
     const key = e.key;
     if (key === "Escape") {
       closeCustomSelect();
     }
+  });
+
+  select.addEventListener("change", () => {
+    console.log("Select changed to value:", select.value);
   });
 };
 
