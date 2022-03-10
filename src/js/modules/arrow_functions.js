@@ -181,12 +181,12 @@ const customSelect = (data) => {
       document.removeEventListener("click", handleOutsideCustomSelect);
     } else {
       openCustomSelect();
-      customOptions.querySelectorAll("[data-option]").forEach((option) => option.addEventListener("mousedown", handleOption));
+      customOptions.querySelectorAll("[data-option]").forEach((option) => option.addEventListener("mousedown", handleCustomOption));
       document.addEventListener("click", handleOutsideCustomSelect);
     }
   };
 
-  const handleOption = (e) => {
+  const handleCustomOption = (e) => {
     select.value = e.target.getAttribute("data-option");
     select.dispatchEvent(new Event("change"));
   };
