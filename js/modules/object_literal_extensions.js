@@ -18,7 +18,7 @@ let me = {
   }
 };
 
-console.log(me);
+console.table(me);
 
 me.greet();
 me["greet in English"]();

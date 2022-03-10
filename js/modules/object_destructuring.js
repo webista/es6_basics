@@ -40,7 +40,7 @@ function getFoodSupplement(name, manufacturer) {
   };
 }
 var supplement = getFoodSupplement("ZMA Max", "Czech Virus");
-console.log(supplement);
+console.table(supplement);
 
 // ES6 object as a return value - no key-value needed
 function getFoodSupplementES6(name, manufacturer) {
@@ -50,6 +50,6 @@ function getFoodSupplementES6(name, manufacturer) {
   };
 }
 let supplementES6 = getFoodSupplementES6("Zinc Matrix", "Reflex Nutrition");
-console.log(supplementES6);
+console.table(supplementES6);
 
 console.groupEnd();
